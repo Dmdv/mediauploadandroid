@@ -12,7 +12,7 @@ public class SampleRequest {
 		
 		try {
 			
-			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateUser(), user.toJsonObject());
+			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateUser(), EntityFactory.CreateStringEntity(user.toJsonObject()));
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -46,7 +46,7 @@ public class SampleRequest {
 		
 		try {
 			
-			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateDevice(), param.toJsonObject());
+			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateDevice(), EntityFactory.CreateStringEntity(param.toJsonObject()));
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
