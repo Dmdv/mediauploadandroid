@@ -12,7 +12,6 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.AbstractHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
@@ -21,13 +20,13 @@ import org.json.JSONObject;
 public class RestEasy {
 	 
     // Post JSON to the resteasy web service
-    public static HttpResponse doPost(String url, AbstractHttpEntity entity) throws ClientProtocolException, IOException 
+    public static HttpResponse doPost(String url, HttpEntity entity) throws ClientProtocolException, IOException 
     {
         HttpPost request = new HttpPost(url);
         request.setHeader("Accept", "application/json");
         request.setHeader("Content-type", "application/json");
         request.setEntity(entity);
-        
+                
         HttpClient httpclient = new DefaultHttpClient();
         return httpclient.execute(request);
     }
@@ -55,7 +54,6 @@ public class RestEasy {
     	delete.addHeader("accept", "application/json");
     	httpclient.execute(delete);
     }
-
  
     // Retrieve a resource from the resteasy web service
     public static JSONObject doGet(String url)

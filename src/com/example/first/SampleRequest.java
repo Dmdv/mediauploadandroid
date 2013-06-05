@@ -12,7 +12,7 @@ public class SampleRequest {
 		
 		try {
 			
-			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateUser(), EntityFactory.CreateStringEntity(user.toJsonObject()));
+			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateUser(), EntityFactory.createStringEntity(user.toJsonObject()));
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -23,35 +23,66 @@ public class SampleRequest {
 		return user;
 	}
 
-	private static User createUser() {
-		String name =  UUID.randomUUID().toString();
-		String password =  UUID.randomUUID().toString();
-		return new User(UUID.randomUUID(), name, password);	
-	}
-
-	public static void GetImage() {
-	}
-
-	public static void UploadImage() {
-	}
-
 	public static void CreateDevice() {
 		
 		User user = CreateUser();
 		
 		UUID deviceGuid = UUID.randomUUID();
 		String deviceName =  UUID.randomUUID().toString();
-
+	
 		CreateDeviceParam param = new CreateDeviceParam(user.get_Name(), user.get_Password(), deviceGuid, deviceName);
 		
 		try {
 			
-			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateDevice(), EntityFactory.CreateStringEntity(param.toJsonObject()));
+			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateDevice(), EntityFactory.createStringEntity(param.toJsonObject()));
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void GetImage() {
+	}
+
+	public static void UploadImage() {
+		
+		User user = CreateUser();
+		
+		UUID deviceGuid = UUID.randomUUID();
+		String deviceName =  UUID.randomUUID().toString();
+	
+		CreateDeviceParam param = new CreateDeviceParam(user.get_Name(), user.get_Password(), deviceGuid, deviceName);
+		
+		try {
+			
+			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateDevice(), EntityFactory.createStringEntity(param.toJsonObject()));
+			
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// TODO:
+		String filePath = "";
+		
+		try {
+			
+			String url = RestCommand.get_Host() + RestCommand.UploadPreview(filePath, deviceGuid.toString());
+			RestEasy.doPost(url, EntityFactory.createFileEntity(filePath));
+			
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static User createUser() {
+		String name =  UUID.randomUUID().toString();
+		String password =  UUID.randomUUID().toString();
+		return new User(UUID.randomUUID(), name, password);	
 	}
 }

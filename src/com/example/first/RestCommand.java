@@ -21,11 +21,11 @@ public class RestCommand
 		return DeviceManager + "/create/device";
 	}
 
-	public static String UploadOriginal(){
-		return DeviceManager + "/uploadoriginal/{filename}/{deviceid}";
+	public static String UploadOriginal(String fileName, String deviceId){
+		return DeviceManager + "/uploadoriginal/" + fileName + "/" + deviceId;
 	}
 
-	public static String UploadPreview(){
-		return DeviceManager + "/uploadpreview/{filename}/{deviceid}";
+	public static String UploadPreview(String fileName, String deviceId){
+		return DeviceManager + "/uploadpreview/" + fileName + "/" + deviceId;
 	}
 }
