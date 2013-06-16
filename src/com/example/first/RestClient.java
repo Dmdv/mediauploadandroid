@@ -10,7 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-//  TODO: Obsolete, do not use.
+//  TODO: Obsolete class, do not use.
 public class RestClient {
 
 	public static String get(String host, int port, String path, String postBody) throws IOException {

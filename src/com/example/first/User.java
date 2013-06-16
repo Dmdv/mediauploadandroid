@@ -34,9 +34,9 @@ public class User implements IJsonConverter {
 		 JSONObject json = new JSONObject();
          try
          {
-        	 json.put("userId", _userId);
-        	 json.put("name", _name);
-             json.put("password", _password);                 
+        	 json.put("UserId", _userId);
+        	 json.put("Name", _name);
+             json.put("Password", _password);                 
          }
          catch (JSONException e)
          {

@@ -23,7 +23,7 @@ public class SampleRequest {
 		return user;
 	}
 
-	public static void CreateDevice() {
+	public static CreateDeviceParam CreateDevice() {
 		
 		User user = CreateUser();
 		
@@ -41,6 +41,8 @@ public class SampleRequest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return param;
 	}
 
 	public static void GetImage() {
@@ -48,30 +50,16 @@ public class SampleRequest {
 
 	public static void UploadImage() {
 		
-		User user = CreateUser();
-		
-		UUID deviceGuid = UUID.randomUUID();
-		String deviceName =  UUID.randomUUID().toString();
-	
-		CreateDeviceParam param = new CreateDeviceParam(user.get_Name(), user.get_Password(), deviceGuid, deviceName);
-		
-		try {
-			
-			RestEasy.doPost(RestCommand.get_Host() + RestCommand.CreateDevice(), EntityFactory.createStringEntity(param.toJsonObject()));
-			
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		CreateDeviceParam param = CreateDevice();
 		
 		// TODO:
-		String filePath = "";
+		String filePath = "/mnt/sdcard/Image.jpg";
+		String filename = "Image222.jpg";
 		
 		try {
 			
-			String url = RestCommand.get_Host() + RestCommand.UploadPreview(filePath, deviceGuid.toString());
-			RestEasy.doPost(url, EntityFactory.createFileEntity(filePath));
+			String url = RestCommand.get_Host() + RestCommand.UploadPreview(filename, param.get_deviceGuid());
+			RestEasy.doPostRaw(url, EntityFactory.createFileEntity(filePath));
 			
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

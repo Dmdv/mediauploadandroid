@@ -6,7 +6,7 @@ public class RestCommand
 	private static String DeviceManager = "/Service.svc/MediaRepositoryService";
 	
 	public static String get_Host(){
-		return "http://mediaupload.cloudapp.net";
+		return "http://mediaupload2.cloudapp.net";
 	}
 
 	public static String CreateUser(){
